@@ -1,3 +1,4 @@
+import 'package:example1/PageBody.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -8,13 +9,7 @@ void main() {
         floatingActionButton: FloatingActionButton(
           onPressed: () => print(" ${i++} pressed"),
         ),
-        body: Container(
-          child: Text(
-            'hello flutter $i',
-            style: TextStyle(fontSize: 30),
-          ),
-          alignment: Alignment.center,
-        ),
+        body: PageBody(i: i),
         appBar: AppBar(
           title: Text('title'),
         ),
