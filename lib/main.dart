@@ -1,19 +1,34 @@
-import 'package:example1/PageBody.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-void main() {
-  int i = 0;
-  runApp(
-    MaterialApp(
+void main(List<String> args) {
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  MyApp({Key key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => print(" ${i++} pressed"),
-        ),
-        body: PageBody(),
-        appBar: AppBar(
-          title: Text('title'),
-        ),
-      ),
-    ),
-  );
+          appBar: AppBar(
+            title: Center(child: Text('image viewer')),
+          ),
+          body: Container(
+            padding: EdgeInsets.all(16),
+            height: 800,
+            alignment: Alignment.center,
+            child: Image.asset(
+              "assets/images/img1.png",
+            ),
+          )),
+    );
+  }
 }
