@@ -9,6 +9,20 @@ class Gallery extends StatefulWidget {
 }
 
 class _GalleryState extends State<Gallery> {
+  void imageBefore() {
+    print(index);
+    setState(() {
+      index = index != 0 ? --index : index;
+    });
+  }
+
+  void imageNext() {
+    print(index);
+    setState(() {
+      index = index != imgs.length - 1 ? ++index : index;
+    });
+  }
+
   int index = 0;
   @override
   Widget build(BuildContext context) {
@@ -35,12 +49,7 @@ class _GalleryState extends State<Gallery> {
                     size: 50,
                     color: Colors.blue,
                   ),
-                  onPressed: () {
-                    print(index);
-                    setState(() {
-                      index = index != 0 ? --index : index;
-                    });
-                  },
+                  onPressed: imageBefore,
                 ),
                 Padding(padding: EdgeInsets.all(8)),
                 IconButton(
