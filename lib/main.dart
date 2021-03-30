@@ -9,7 +9,7 @@ void main() {
         floatingActionButton: FloatingActionButton(
           onPressed: () => print(" ${i++} pressed"),
         ),
-        body: PageBody(i: i),
+        body: PageBody(),
         appBar: AppBar(
           title: Text('title'),
         ),

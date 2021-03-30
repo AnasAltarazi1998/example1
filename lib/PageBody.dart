@@ -3,12 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class PageBody extends StatelessWidget {
-  const PageBody({
-    Key key,
-    @required this.i,
-  }) : super(key: key);
-
-  final int i;
+  const PageBody({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
