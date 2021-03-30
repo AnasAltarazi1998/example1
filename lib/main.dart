@@ -1,5 +1,6 @@
 import 'package:example1/Consts.dart';
-import 'package:example1/MyApp.dart';
+import 'package:example1/Gallery.dart';
+import 'package:example1/Home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -7,16 +8,17 @@ void main(List<String> args) {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   MyApp({Key key}) : super(key: key);
-
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: Home());
+    return MaterialApp(
+      routes: {
+        "/home": (_) => Home(),
+        "/gallery": (_) => Gallery(),
+      },
+      debugShowCheckedModeBanner: false,
+      home: Home(),
+    );
   }
 }

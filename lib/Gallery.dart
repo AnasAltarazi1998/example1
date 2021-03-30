@@ -24,44 +24,37 @@ class _GalleryState extends State<Gallery> {
           children: [
             Image.asset(
               imgs[index],
-              height: 600,
             ),
             Padding(padding: EdgeInsets.all(8)),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextButton(
-                  style: TextButton.styleFrom(
-                      backgroundColor: index != 0
-                          ? Colors.blue.shade100
-                          : Colors.blue.shade400),
+                IconButton(
+                  icon: Icon(
+                    Icons.navigate_before,
+                    size: 50,
+                    color: Colors.blue,
+                  ),
                   onPressed: () {
                     print(index);
                     setState(() {
                       index = index != 0 ? --index : index;
                     });
                   },
-                  child: Text(
-                    'prev',
-                    style: TextStyle(fontSize: 24),
-                  ),
                 ),
                 Padding(padding: EdgeInsets.all(8)),
-                TextButton(
-                  style: TextButton.styleFrom(
-                      backgroundColor: index != imgs.length - 1
-                          ? Colors.blue.shade100
-                          : Colors.blue.shade400),
+                IconButton(
+                  icon: Icon(
+                    Icons.navigate_next,
+                    size: 50,
+                    color: Colors.blue,
+                  ),
                   onPressed: () {
                     print(index);
                     setState(() {
                       index = index != imgs.length - 1 ? ++index : index;
                     });
                   },
-                  child: Text(
-                    'next',
-                    style: TextStyle(fontSize: 24),
-                  ),
                 ),
               ],
             )
