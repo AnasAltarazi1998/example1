@@ -1,51 +1,42 @@
 import 'package:flutter/material.dart';
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   const Home({Key key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  bool favIndicator = false;
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        bottom: PreferredSize(
-            child: Container(
-              color: Colors.indigo,
-            ),
-            preferredSize: Size.fromHeight(50)),
-        leading: Icon(Icons.search_rounded),
-        actions: [
-          IconButton(
-            icon: Icon(favIndicator ? Icons.favorite : Icons.favorite_border),
-            onPressed: changeFavState,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: IconButton(
-              icon: Icon(Icons.person),
-              onPressed: () =>
-                  Navigator.of(context).pushReplacementNamed('/profile'),
-            ),
-          )
-        ],
-        title: Text('app title'),
+      appBar: AppBar(),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            UserAccountsDrawerHeader(
+                accountEmail: Text('flutter@any.com'),
+                accountName: Text('AnasTar'),
+                currentAccountPicture: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                      'https://eu.ui-avatars.com/api/?name=flutter%20dev'),
+                )),
+          ],
+        ),
       ),
-      body: Container(
-        alignment: Alignment.center,
-        child: Text('body value'),
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        child: Row(
+          children: [
+            IconButton(icon: Icon(Icons.menu), onPressed: () {}),
+            Spacer(),
+            IconButton(
+                icon: Icon(Icons.add_photo_alternate_sharp), onPressed: () {}),
+          ],
+        ),
       ),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+            Navigator.of(context).pushNamed('/profile');
+          }),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
-  }
-
-  changeFavState() {
-    setState(() {
-      favIndicator = !favIndicator;
-    });
   }
 }
