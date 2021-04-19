@@ -18,7 +18,11 @@ class MyApp extends StatelessWidget {
         '/home': (_) => Home(),
         '/profile': (_) => Profile(),
       },
-      theme: ThemeData(bottomAppBarColor: Colors.blue),
+      theme: ThemeData(
+        bottomAppBarColor: Colors.blue,
+        // bottomNavigationBarTheme:
+        //     BottomNavigationBarThemeData(backgroundColor: Colors.indigo),
+      ),
       home: Home(),
     );
   }

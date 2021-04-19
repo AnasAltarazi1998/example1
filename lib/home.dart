@@ -18,8 +18,13 @@ class Home extends StatelessWidget {
                     'https://eu.ui-avatars.com/api/?name=flutter%20dev'),
               ),
               decoration: BoxDecoration(
+                color: Colors.indigo,
+                borderRadius: BorderRadius.circular(1000),
                 image: DecorationImage(
-                    image: AssetImage('assets/appbar.jpg'), fit: BoxFit.cover),
+                  image: AssetImage(
+                    'assets/appbar.jpg',
+                  ),
+                ),
               ),
             ),
           ],
