@@ -1,28 +1,14 @@
-import 'package:example1/Home.dart';
-import 'package:example1/profile.dart';
+import 'package:example1/home.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({
-    Key key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: {
-        '/home': (_) => Home(),
-        '/profile': (_) => Profile(),
-      },
-      theme: ThemeData(
-        bottomAppBarColor: Colors.blue,
-        // bottomNavigationBarTheme:
-        //     BottomNavigationBarThemeData(backgroundColor: Colors.indigo),
-      ),
+      debugShowCheckedModeBanner: false,
+      title: 'Material App',
       home: Home(),
     );
   }

@@ -1,52 +1,94 @@
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key key}) : super(key: key);
+  const Home({
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      drawer: Drawer(
-        child: Column(
+        body: Column(
+      children: [
+        Container(
+          margin: EdgeInsets.only(top: 8, left: 8, right: 8),
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height / 2 - 5,
+          color: Colors.indigo,
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 5),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            UserAccountsDrawerHeader(
-              accountEmail: Text('flutter@any.com'),
-              accountName: Text('AnasTar'),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: NetworkImage(
-                    'https://eu.ui-avatars.com/api/?name=flutter%20dev'),
-              ),
-              decoration: BoxDecoration(
-                color: Colors.indigo,
-                borderRadius: BorderRadius.circular(1000),
-                image: DecorationImage(
-                  image: AssetImage(
-                    'assets/appbar.jpg',
-                  ),
-                ),
-              ),
+            Container(
+              width: MediaQuery.of(context).size.width / 3 - 10,
+              height: MediaQuery.of(context).size.height / 6 - 13,
+              color: Colors.indigo,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width / 3 - 10,
+              height: MediaQuery.of(context).size.height / 6 - 13,
+              color: Colors.indigo,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width / 3 - 10,
+              height: MediaQuery.of(context).size.height / 6 - 13,
+              color: Colors.indigo,
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        child: Row(
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 5),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            IconButton(icon: Icon(Icons.menu), onPressed: () {}),
-            Spacer(),
-            IconButton(
-                icon: Icon(Icons.add_photo_alternate_sharp), onPressed: () {}),
+            Container(
+              width: MediaQuery.of(context).size.width / 2 - 10,
+              height: MediaQuery.of(context).size.height / 6 - 13,
+              color: Colors.indigo,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width / 2 - 10,
+              height: MediaQuery.of(context).size.height / 6 - 13,
+              color: Colors.indigo,
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/profile');
-          }),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-    );
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 5),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Row(
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width / 6,
+                height: MediaQuery.of(context).size.height / 6 - 13,
+                color: Colors.indigo,
+              ),
+              Spacer(),
+              Container(
+                width: MediaQuery.of(context).size.width / 6,
+                height: MediaQuery.of(context).size.height / 6 - 13,
+                color: Colors.indigo,
+              ),
+            ],
+          ),
+        ),
+      ],
+    ));
   }
 }
