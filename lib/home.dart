@@ -8,87 +8,30 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        Container(
-          margin: EdgeInsets.only(top: 8, left: 8, right: 8),
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height / 2 - 5,
-          color: Colors.indigo,
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 5),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width / 3 - 10,
-              height: MediaQuery.of(context).size.height / 6 - 13,
-              color: Colors.indigo,
+      // Use a Builder to get a context within the Scaffold.
+      body: Builder(
+        builder: (context) {
+          return Center(
+            child: TextButton(
+              child: Text('SHOW BOTTOM SHEET'),
+              onPressed: () {
+                showBottomSheet(
+                  context: context,
+                  builder: (_) {
+                    final theme = Theme.of(context);
+                    // Using Wrap makes the bottom sheet height the height of the content.
+                    // Otherwise, the height will be half the height of the screen.
+                    return Container(
+                      height: 500,
+                      color: Colors.indigo,
+                    );
+                  },
+                );
+              },
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width / 3 - 10,
-              height: MediaQuery.of(context).size.height / 6 - 13,
-              color: Colors.indigo,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width / 3 - 10,
-              height: MediaQuery.of(context).size.height / 6 - 13,
-              color: Colors.indigo,
-            ),
-          ],
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 5),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width / 2 - 10,
-              height: MediaQuery.of(context).size.height / 6 - 13,
-              color: Colors.indigo,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width / 2 - 10,
-              height: MediaQuery.of(context).size.height / 6 - 13,
-              color: Colors.indigo,
-            ),
-          ],
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 5),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width / 6,
-                height: MediaQuery.of(context).size.height / 6 - 13,
-                color: Colors.indigo,
-              ),
-              Spacer(),
-              Container(
-                width: MediaQuery.of(context).size.width / 6,
-                height: MediaQuery.of(context).size.height / 6 - 13,
-                color: Colors.indigo,
-              ),
-            ],
-          ),
-        ),
-      ],
-    ));
+          );
+        },
+      ),
+    );
   }
 }
