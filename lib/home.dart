@@ -1,71 +1,119 @@
 import 'package:flutter/material.dart';
 
-class StackAndPositionedDemo extends StatefulWidget {
+class Home extends StatefulWidget {
+  Home({Key key}) : super(key: key);
+
   @override
-  _StackAndPositionedDemoState createState() => _StackAndPositionedDemoState();
+  _HomeState createState() => _HomeState();
 }
 
-class _StackAndPositionedDemoState extends State<StackAndPositionedDemo> {
-  bool state = true;
+class _HomeState extends State<Home> {
+  DateTime _date = DateTime(2020, 11, 17);
+
+  void _selectDate() async {
+    final DateTime newDate = await showDatePicker(
+      context: context,
+      initialDate: _date,
+      firstDate: DateTime(2017, 1),
+      lastDate: DateTime(2022, 7),
+    );
+    if (newDate != null) {
+      setState(() {
+        _date = newDate;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Stack & Positioned Widget'),
-        centerTitle: true,
-      ),
-      body: Container(
-        padding: EdgeInsets.all(4),
-        child: Stack(
-          children: <Widget>[
-            Positioned(
-              top: state ? 125 : 0,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                color: Colors.red[400],
-                child: Text(
-                  'Red',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-              ),
-            ),
-            if (state)
-              Positioned(
-                top: 0,
-                left: 0,
-                child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(color: Colors.black, blurRadius: 10),
-                      ],
-                    ),
-                    width: MediaQuery.of(context).size.width,
-                    child: MaterialBanner(
-                      content: const Text('Error message text'),
-                      leading: CircleAvatar(child: Icon(Icons.delete)),
-                      actions: [
-                        TextButton(
-                          child: const Text('ACTION 1'),
-                          onPressed: () {
-                            setState(() {
-                              state = false;
-                            });
-                          },
-                        ),
-                        TextButton(
-                          child: const Text('ACTION 2'),
-                          onPressed: () {},
-                        ),
-                      ],
-                    )),
-              ),
-          ],
+        appBar: AppBar(
+          title: Text('${_date.year}-${_date.month}-${_date.day}'),
         ),
-      ),
-    );
+        body: ListView(children: [
+          Card(
+            clipBehavior: Clip.antiAlias,
+            child: Column(
+              children: [
+                Image.asset('assets/appbar.jpg'),
+                ListTile(
+                  leading: Icon(Icons.arrow_drop_down_circle),
+                  title: Text('Card title 1'),
+                  subtitle: Text(
+                    'Secondary Text',
+                    style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                  ),
+                ),
+                Divider(
+                  indent: 50,
+                  endIndent: 50,
+                  thickness: 2,
+                ),
+                Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text(
+                    'Greyhound divisively hello coldly wonderfully marginally far upon excluding.',
+                    style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                  ),
+                ),
+                ButtonBar(
+                  alignment: MainAxisAlignment.start,
+                  children: [
+                    TextButton(
+                      onPressed: _selectDate,
+                      child: Text('ACTION 1'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        // Perform some action
+                      },
+                      child: Text('ACTION 2'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Card(
+            clipBehavior: Clip.antiAlias,
+            child: Column(
+              children: [
+                Image.asset('assets/appbar.jpg'),
+                ListTile(
+                  leading: Icon(Icons.arrow_drop_down_circle),
+                  title: Text('Card title 1'),
+                  subtitle: Text(
+                    'Secondary Text',
+                    style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text(
+                    'Greyhound divisively hello coldly wonderfully marginally far upon excluding.',
+                    style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                  ),
+                ),
+                ButtonBar(
+                  alignment: MainAxisAlignment.start,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        // Perform some action
+                      },
+                      child: Text('ACTION 1'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        // Perform some action
+                      },
+                      child: Text('ACTION 2'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ]));
   }
 }

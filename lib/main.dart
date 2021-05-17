@@ -1,4 +1,3 @@
-import 'package:example1/dialog.dart';
 import 'package:example1/home.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +8,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      home: DialogPage(),
+      home: Home(),
     );
   }
 }
