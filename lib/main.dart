@@ -1,4 +1,5 @@
 import 'package:example1/home.dart';
+import 'package:example1/radio_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -8,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      home: Home(),
+      home: RadioPage(),
     );
   }
 }
