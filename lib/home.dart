@@ -1,119 +1,68 @@
+import 'package:example1/inh_widget.dart';
+import 'package:example1/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Home extends StatefulWidget {
   Home({Key key}) : super(key: key);
-
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  DateTime _date = DateTime(2020, 11, 17);
-
-  void _selectDate() async {
-    final DateTime newDate = await showDatePicker(
-      context: context,
-      initialDate: _date,
-      firstDate: DateTime(2017, 1),
-      lastDate: DateTime(2022, 7),
-    );
-    if (newDate != null) {
-      setState(() {
-        _date = newDate;
-      });
-    }
-  }
-
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('${_date.year}-${_date.month}-${_date.day}'),
+      appBar: AppBar(),
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(padding: EdgeInsets.all(8)),
+            Center(child: Text('form')),
+            Padding(padding: EdgeInsets.all(8)),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: TextField(
+                controller: emailController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'email',
+                ),
+              ),
+            ),
+            Padding(padding: EdgeInsets.all(8)),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: TextField(
+                controller: passwordController,
+                obscureText: true,
+                style: TextStyle(),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Password',
+                  labelStyle: TextStyle(),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Get.put(emailController.text, tag: 'email');
+                  BaseWidget.of(context).password = passwordController.text;
+                  Get.to(
+                    () => Profile(),
+                  );
+                },
+                child: Text('data'),
+              ),
+            )
+          ],
         ),
-        body: ListView(children: [
-          Card(
-            clipBehavior: Clip.antiAlias,
-            child: Column(
-              children: [
-                Image.asset('assets/appbar.jpg'),
-                ListTile(
-                  leading: Icon(Icons.arrow_drop_down_circle),
-                  title: Text('Card title 1'),
-                  subtitle: Text(
-                    'Secondary Text',
-                    style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                  ),
-                ),
-                Divider(
-                  indent: 50,
-                  endIndent: 50,
-                  thickness: 2,
-                ),
-                Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text(
-                    'Greyhound divisively hello coldly wonderfully marginally far upon excluding.',
-                    style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                  ),
-                ),
-                ButtonBar(
-                  alignment: MainAxisAlignment.start,
-                  children: [
-                    TextButton(
-                      onPressed: _selectDate,
-                      child: Text('ACTION 1'),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        // Perform some action
-                      },
-                      child: Text('ACTION 2'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Card(
-            clipBehavior: Clip.antiAlias,
-            child: Column(
-              children: [
-                Image.asset('assets/appbar.jpg'),
-                ListTile(
-                  leading: Icon(Icons.arrow_drop_down_circle),
-                  title: Text('Card title 1'),
-                  subtitle: Text(
-                    'Secondary Text',
-                    style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text(
-                    'Greyhound divisively hello coldly wonderfully marginally far upon excluding.',
-                    style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                  ),
-                ),
-                ButtonBar(
-                  alignment: MainAxisAlignment.start,
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        // Perform some action
-                      },
-                      child: Text('ACTION 1'),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        // Perform some action
-                      },
-                      child: Text('ACTION 2'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ]));
+      ),
+    );
   }
 }
