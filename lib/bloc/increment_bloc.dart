@@ -9,9 +9,10 @@ part 'increment_state.dart';
 
 class IncrementBloc extends Bloc<IncrementEvent, IncrementState> {
   IncrementBloc() : super(IncrementInitial());
-  void wait() async {
-    get(Uri.parse(
+  Future<dynamic> wait() async {
+    var response = get(Uri.parse(
         'https://www.digitalocean.com/community/tutorials/flutter-flutter-http#:~:text=How%20To%20Use%20HTTP%20Requests%20in%20Flutter%201,Displaying%20PostDetail.%20...%205%20Handling%20DELETE%20Requests.%20'));
+    return response;
   }
 
   @override
@@ -19,8 +20,8 @@ class IncrementBloc extends Bloc<IncrementEvent, IncrementState> {
     yield IncrementInitial();
     if (event is IncrementImpl) {
       yield IncrementProcessing();
-      wait();
-      yield Done(i: ++event.i);
+      var res = wait();
+      yield Done(i: ++event.i, response: res);
     }
   }
 }

@@ -7,7 +7,8 @@ class IncrementInitial extends IncrementState {}
 
 class Done extends IncrementState {
   int i;
-  Done({this.i});
+  dynamic response;
+  Done({this.i, this.response});
   get props => null;
 }
 

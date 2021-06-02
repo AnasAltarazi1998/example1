@@ -24,9 +24,10 @@ class _HomeState extends State<Home> {
           builder: (context, state) {
             if (state is IncrementInitial) {
               return Center(
-                  child: Container(
-                child: Text('$j'),
-              ));
+                child: Container(
+                  child: Text('$j'),
+                ),
+              );
             } else if (state is IncrementProcessing) {
               return Center(
                   child: Container(
