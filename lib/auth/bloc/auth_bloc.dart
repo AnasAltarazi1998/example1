@@ -25,7 +25,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       print(cred.toString());
       if (cred.toString().contains('id')) {
         SharedPreferences _sharedPref = await SharedPreferences.getInstance();
-        Map<String, dynamic> data = json.decode(cred.toString());
+        Map<String, dynamic> data = cred;
         _sharedPref.setString('email', data['email']);
         _sharedPref.setString('password', data['password']);
         _sharedPref.setInt('id', data['id']);
