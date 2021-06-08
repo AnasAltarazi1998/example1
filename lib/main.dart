@@ -1,3 +1,5 @@
+import 'package:example1/articles/UI/pages/articles_ui.dart';
+import 'package:example1/articles/services/article_service.dart';
 import 'package:example1/auth/pages/SignIn.dart';
 import 'package:example1/profile/profile.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +23,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'bloc Auth',
-      initialRoute: home,
-      routes: {'/home': (_) => SignIn(), '/profile': (_) => Profile()},
+      initialRoute: '/articles',
+      routes: {
+        '/home': (_) => SignIn(),
+        '/profile': (_) => Profile(),
+        '/articles': (_) => Articles()
+      },
     );
   }
 }
