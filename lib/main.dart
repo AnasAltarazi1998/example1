@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'bloc Auth',
-      initialRoute: '/articles',
+      initialRoute: home,
       routes: {
         '/home': (_) => SignIn(),
         '/profile': (_) => Profile(),

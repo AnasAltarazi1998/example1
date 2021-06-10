@@ -23,12 +23,13 @@ class ArticleForm extends StatelessWidget {
             Container(
               width: double.infinity,
               height: 200,
-              child: Image.network(articleModel.urlToImage),
+              child: Image.network(articleModel.urlToImage ??
+                  'https://tse4.mm.bing.net/th/id/OIP.03JW-SadNng_Mj6QbSbVaAHaFH?pid=ImgDet&rs=1'),
               padding: EdgeInsets.all(16),
             ),
             GestureDetector(
               onTap: () async {
-                await launch(articleModel.url);
+                if (articleModel.url != null) await launch(articleModel.url);
               },
               child: ListTile(
                 title: Text(

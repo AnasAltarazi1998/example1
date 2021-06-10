@@ -21,12 +21,13 @@ class Profile extends StatelessWidget {
           children: [
             Text('data'),
             ElevatedButton(
-                onPressed: () async {
-                  SharedPreferences sharedPreferences = await _initSharedPref();
-                  sharedPreferences.clear();
-                  Get.offAllNamed('/home');
-                },
-                child: Text('logout'))
+              onPressed: () async {
+                SharedPreferences sharedPreferences = await _initSharedPref();
+                sharedPreferences.clear();
+                Get.offAllNamed('/home');
+              },
+              child: Text('logout'),
+            ),
           ],
         ),
       ),

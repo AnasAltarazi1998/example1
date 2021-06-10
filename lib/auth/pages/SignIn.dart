@@ -27,7 +27,7 @@ class SignIn extends StatelessWidget {
               BlocConsumer<AuthBloc, AuthState>(
                 listener: (context, state) {
                   if (state is SignInSuccessed) {
-                    Get.offAllNamed('/profile');
+                    Get.offAllNamed('/articles');
                   } else if (state is SignInFaildState) {
                     Get.snackbar('error message', state.errorMessage);
                   }

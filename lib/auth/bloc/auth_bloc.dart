@@ -29,7 +29,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         _sharedPref.setString('email', data['email']);
         _sharedPref.setString('password', data['password']);
         _sharedPref.setInt('id', data['id']);
-        _sharedPref.setString('home', '/profile');
+        _sharedPref.setString('home', '/articles');
         yield SignInSuccessed();
       } else {
         yield SignInFaildState(errorMessage: cred.toString());
