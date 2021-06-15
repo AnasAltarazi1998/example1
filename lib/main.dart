@@ -1,34 +1,53 @@
-import 'package:example1/articles/UI/pages/articles_ui.dart';
-import 'package:example1/articles/services/article_service.dart';
-import 'package:example1/auth/pages/SignIn.dart';
-import 'package:example1/profile/profile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  // sharedPreferences.clear();
-  print(sharedPreferences.getString("home"));
-  runApp(MyApp(
-    home: sharedPreferences.getString("home") ?? "/home",
-  ));
+  await Firebase.initializeApp();
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  String home;
-  MyApp({this.home});
+  TextEditingController nameController = TextEditingController();
+  Future<void> _addName({String name}) async {
+    CollectionReference names = FirebaseFirestore.instance.collection('names');
+    names
+        .add({'name': name})
+        .then((value) => print('user added'))
+        .catchError((error) => print(error));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'bloc Auth',
-      initialRoute: home,
-      routes: {
-        '/home': (_) => SignIn(),
-        '/profile': (_) => Profile(),
-        '/articles': (_) => Articles()
-      },
+    return MaterialApp(
+      title: 'Material App',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Material App Bar'),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: TextField(
+                controller: nameController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () => _addName(name: nameController.text),
+              child: Text('send'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
