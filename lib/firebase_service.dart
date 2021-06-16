@@ -6,16 +6,13 @@ import 'package:path/path.dart' as path;
 
 class FireBaseService {
   static final FireBaseService instance = FireBaseService._internal();
-  static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  static FirebaseFirestore _firestore;
   static final FirebaseStorage _firestorage = FirebaseStorage.instance;
   factory FireBaseService() {
     return instance;
   }
 
-  FireBaseService._internal() {
-    Firebase.initializeApp();
-  }
-
+  FireBaseService._internal();
   Future<List<UserModel>> save(UserModel model) async {
     String id = '';
     await _firestore
@@ -39,16 +36,25 @@ class FireBaseService {
   }
 
   Future<List<UserModel>> data() async {
-    List<UserModel> list = List.empty(growable: true);
-    _firestore.collection('users').get().then(
-          (docs) => list = docs.docs.map<UserModel>(
-            (item) => UserModel.fromJson(
-              {
-                'name': item.get('name'),
-              },
+    if (_firestore == null) {
+      _firestore = FirebaseFirestore.instance;
+    }
+    List<UserModel> list =
+        List.from(await _firestore.collection('users').get().then(
+              (docs) => docs.docs.map<UserModel>(
+                (e) => UserModel(
+                  name: e.get('name'),
+                ),
+              ),
+            ));
+    _firestore.collection('users').get().then((docs) => docs.docs.map(
+          (e) => list.add(
+            UserModel(
+              name: e.get('name'),
             ),
           ),
-        );
+        ));
+    print(list.length);
     return list;
   }
 }

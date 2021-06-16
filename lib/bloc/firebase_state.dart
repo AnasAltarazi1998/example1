@@ -23,4 +23,6 @@ class SavedData extends FirebaseState {
   SavedData({this.users});
 }
 
+class UploadingImage extends FirebaseState {}
+
 class FaildState extends FirebaseState {}

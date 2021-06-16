@@ -10,11 +10,16 @@ class FireBasePage extends StatelessWidget {
     Key key,
   }) : super(key: key);
   TextEditingController nameCon = TextEditingController();
+  FirebaseBloc firebaseBloc;
   File img;
   @override
   Widget build(BuildContext context) {
     return BlocProvider<FirebaseBloc>(
-      create: (context) => FirebaseBloc(),
+      create: (context) {
+        firebaseBloc = FirebaseBloc();
+        firebaseBloc.add(LoadData());
+        return firebaseBloc;
+      },
       child: Scaffold(
         appBar: AppBar(
           title: Text('firebase app'),
@@ -45,13 +50,14 @@ class FireBasePage extends StatelessWidget {
                           color: Colors.blue,
                         ),
                         onPressed: () {
-                          BlocProvider.of<FirebaseBloc>(context).add(
+                          firebaseBloc.add(
                             SaveData(
                               userModel: UserModel(
                                   name: nameCon.text,
                                   img: this.img != null ? this.img : null),
                             ),
                           );
+                          nameCon.clear();
                         },
                       ),
                     )
@@ -64,10 +70,14 @@ class FireBasePage extends StatelessWidget {
                   child: BlocConsumer<FirebaseBloc, FirebaseState>(
                     listener: (context, state) {
                       if (state is FirebaseInitial)
-                        BlocProvider.of<FirebaseBloc>(context).add(LoadData());
+                        firebaseBloc.add(LoadData());
                     },
                     builder: (context, state) {
                       if (state is FirebaseInitial || state is SavingData) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else if (state is UploadingImage) {
                         return Center(
                           child: CircularProgressIndicator(),
                         );
@@ -177,15 +187,13 @@ class FireBasePage extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () {
-                        BlocProvider.of<FirebaseBloc>(context)
-                            .add(TakeImage(source: 'camera'));
+                        firebaseBloc.add(TakeImage(source: 'camera'));
                       },
                       child: Text('camera'),
                     ),
                     TextButton(
                       onPressed: () {
-                        BlocProvider.of<FirebaseBloc>(context)
-                            .add(TakeImage(source: 'gallery'));
+                        firebaseBloc.add(TakeImage(source: 'gallery'));
                       },
                       child: Text('gallery'),
                     ),

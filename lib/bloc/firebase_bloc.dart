@@ -19,6 +19,7 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
     FirebaseEvent event,
   ) async* {
     if (event is SaveData) {
+      yield UploadingImage();
       yield SavedData(
         users: await fireBaseService.save(event.userModel),
       );
@@ -33,10 +34,11 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
               ? ImageSource.camera
               : ImageSource.gallery,
           maxWidth: 1920);
-      yield TakingImage(
-        users: await fireBaseService.data(),
-        img: File(pickedImage.path),
-      );
+      if (pickedImage?.path != null)
+        yield TakingImage(
+          users: await fireBaseService.data(),
+          img: File(pickedImage.path),
+        );
     }
   }
 }
